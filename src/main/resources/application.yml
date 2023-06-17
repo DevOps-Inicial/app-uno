@@ -14,3 +14,15 @@ spring:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     open-in-view: false
     generate-ddl: true
+springdoc:
+  packages-to-scan: 'tech.icei.web.api.appuno.controller'
+logging:
+  pattern:
+    console: "%d{dd-MM-yyyy HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"
+    file: "%d{dd-MM-yyyy HH:mm:ss.SSS} %p %c{1.} [%t] %m%n"
+  level:
+    org.springframework.web: ERROR
+    tech.icei.web.api.appuno: DEBUG
+    org.hibernate: ERROR
+  file:
+    name: icei-app-employees.log
