@@ -15,7 +15,7 @@ import tech.icei.web.api.appuno.service.IGEmployeeService;
 import java.util.List;
 import java.util.stream.Collectors;
 @RestController
-@RequestMapping("api/v1/fullstack")
+@RequestMapping("api/v1")
 @RequiredArgsConstructor
 @Slf4j
 public class GEmployeeController {

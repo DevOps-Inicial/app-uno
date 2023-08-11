@@ -2,7 +2,6 @@ package tech.icei.web.api.appuno.security.service;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,14 +14,13 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-@Getter
 public class UserDetailsImpl implements UserDetails {
     @Serial
     private static final long serialVersionUID = 3814214723061121561L;
 
-    private final String id;
-    private final String username;
-    private final String email;
+    private String id;
+    private String username;
+    private String email;
     @JsonIgnore
     private final String password;
     private final Collection<? extends GrantedAuthority> authorities;
@@ -36,7 +34,7 @@ public class UserDetailsImpl implements UserDetails {
     }
     public static UserDetailsImpl build(GUser gUser) {
         List<GrantedAuthority> authorities = gUser.getRoles().stream()
-                .map(rol -> new SimpleGrantedAuthority(rol.getName().name()))
+                .map(role -> new SimpleGrantedAuthority(role.getName().name()))
                 .collect(Collectors.toList());
 
         return new UserDetailsImpl(
@@ -52,6 +50,8 @@ public class UserDetailsImpl implements UserDetails {
         return authorities;
     }
 
+    public String getId() { return id; }
+    public String getEmail() { return email; }
     @Override
     public String getPassword() {
         return password;
