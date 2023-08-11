@@ -13,7 +13,6 @@ import tech.icei.web.api.appuno.entity.Employee;
 import tech.icei.web.api.appuno.service.IEmployeeService;
 
 import java.util.List;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 @RestController
@@ -57,7 +56,7 @@ public class EmployeeController {
     }
     // Obtener un registro
     @GetMapping("/single-employees/{id}")
-    public ResponseEntity<EmployeeDto> findEmployeeByID(@Valid @PathVariable UUID id) {
+    public ResponseEntity<EmployeeDto> findEmployeeByID(@Valid @PathVariable String id) {
 
         try {
             var singleEmployee = employeeService.findByEmployeeID(id);
@@ -89,7 +88,7 @@ public class EmployeeController {
 
     // Actualizar el registro
     @PutMapping("/catchup-employees/{id}")
-    public ResponseEntity<EmployeeDto> updateEmployee(@Valid @PathVariable UUID id, @Valid @RequestBody EmployeeDto uEmployeeDto) {
+    public ResponseEntity<EmployeeDto> updateEmployee(@Valid @PathVariable String id, @Valid @RequestBody EmployeeDto uEmployeeDto) {
 
         try {
             var employeeRequest = modelMapper.map(uEmployeeDto, Employee.class);
@@ -106,7 +105,7 @@ public class EmployeeController {
 
     // Eliminacio logica del registro
     @PatchMapping("/remove-employees/{id}")
-    public ResponseEntity<EmployeeDto> deleteEmployeeByID(@Valid @PathVariable UUID id) {
+    public ResponseEntity<EmployeeDto> deleteEmployeeByID(@Valid @PathVariable String id) {
 
         try {
             var deletedEmployee = employeeService.delete(id);

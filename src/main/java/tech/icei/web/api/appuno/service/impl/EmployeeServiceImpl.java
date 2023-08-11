@@ -31,7 +31,7 @@ public class EmployeeServiceImpl implements IEmployeeService {
 
     @Override
     @Transactional(readOnly = true)
-    public Optional<Employee> findByEmployeeID(UUID id) {
+    public Optional<Employee> findByEmployeeID(String id) {
         return employeeRespository.findByEmployeeId(id);
     }
 
@@ -43,7 +43,7 @@ public class EmployeeServiceImpl implements IEmployeeService {
 
     @Override
     @Transactional
-    public Employee update(UUID id, Employee updEmployee) {
+    public Employee update(String id, Employee updEmployee) {
         var updatedEmployee = employeeRespository.findByEmployeeId(id);
 
         if (updatedEmployee.isPresent()) {
@@ -58,7 +58,7 @@ public class EmployeeServiceImpl implements IEmployeeService {
 
     @Override
     @Transactional
-    public Employee delete(UUID id) {
+    public Employee delete(String id) {
         var deletedEmployee = employeeRespository.findByEmployeeId(id);
         deletedEmployee.ifPresent(delEmployee->deletedEmployee.get().setEnabled(false));
         return employeeRespository.save(deletedEmployee.get());

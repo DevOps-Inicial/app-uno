@@ -13,8 +13,8 @@ public interface IEmployeeService {
     List<Employee> findAll();
     // Listar todos los registros habilitados (enabled true)
     List<Employee> findAllEnabled(boolean enabled);
-    Optional<Employee> findByEmployeeID(UUID id);
+    Optional<Employee> findByEmployeeID(String id);
     Employee save(Employee newEmployee);
-    Employee update(UUID id, Employee updEmployee);
-    Employee delete(UUID id);
+    Employee update(String id, Employee updEmployee);
+    Employee delete(String id);
 }

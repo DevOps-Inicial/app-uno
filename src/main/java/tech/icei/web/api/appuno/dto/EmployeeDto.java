@@ -9,7 +9,7 @@ import java.util.UUID;
 @Data
 public class EmployeeDto implements Serializable {
 
-    private UUID employeeId;
+    private String employeeId;
     private String nombreCompleto;
     private String direccion;
     private String puestoAsignado;

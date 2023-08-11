@@ -3,12 +3,12 @@ server:
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://192.168.138.128:5432/icei_employee
+    url: jdbc:postgresql://192.168.138.139:5432/icei_employees
     username: sqluser
     password: D3v310p342022***
   jpa:
     hibernate:
-      ddl-auto: none
+      ddl-auto: create
     show-sql: true
     database: postgresql
     database-platform: org.hibernate.dialect.PostgreSQLDialect
