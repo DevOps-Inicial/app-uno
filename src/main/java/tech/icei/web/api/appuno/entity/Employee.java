@@ -6,7 +6,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.UuidGenerator;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
@@ -15,8 +14,6 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
-import java.util.UUID;
-
 @Getter
 @Setter
 @AllArgsConstructor
@@ -31,39 +28,40 @@ public class Employee {
     @Column(name = "employee_id", unique = true, nullable = false)
     private String employeeId;
 
-    @Column(name = "nombre_completo", length = 85)
-    private String nombreCompleto;
+    @Column(name = "first_name", length = 45)
+    private String firstName;
 
-    @Column(length = 200)
-    private String direccion;
-
-    @Column(name = "puesto_asignado", length = 85)
-    private String puestoAsignado;
+    @Column(name = "last_name", length = 45)
+    private String lastName;
 
     @Email
     private String email;
 
-    // Atributo para realizar la eliminación lógica
+    @Column(length = 200)
+    private String address;
+
+    @Column(name = "cell_phone", length = 15)
+    private String cellPhone;
+
     private boolean enabled;
 
-    // Atributos para la realizacion de auditoria
     @CreatedBy
-    @Column(name = "creado_por", nullable = false, updatable = false)
-    private String creadoPor;
+    @Column(name = "created_by_user", nullable = false, updatable = false)
+    private String createdByUser;
 
     @CreatedDate
-    @Column(name = "fecha_creacion", nullable = false, updatable = false)
-    private LocalDateTime fechaCreacion;
+    @Column(name = "created_date", nullable = false, updatable = false)
+    private LocalDateTime createdDate;
 
     @LastModifiedBy
-    @Column(name = "modificado_por")
-    private String modificadoPor;
+    @Column(name = "last_modified_by_user")
+    private String lastModifiedByUser;
 
     @LastModifiedDate
-    @Column(name = "fecha_modificacion")
-    private LocalDateTime fechaModificacion;
+    @Column(name = "last_modified_date")
+    private LocalDateTime lastModifiedDate;
 
     @Version
-    @Column(name = "numero_de_modificaciones")
-    private long numeroModificacion;
+    @Column(name = "number_of_modifications")
+    private long numberOfModification;
 }

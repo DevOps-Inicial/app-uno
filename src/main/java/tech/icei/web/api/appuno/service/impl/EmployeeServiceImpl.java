@@ -9,7 +9,6 @@ import tech.icei.web.api.appuno.service.IEmployeeService;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 @RequiredArgsConstructor
 @Service
@@ -47,10 +46,11 @@ public class EmployeeServiceImpl implements IEmployeeService {
         var updatedEmployee = employeeRespository.findByEmployeeId(id);
 
         if (updatedEmployee.isPresent()) {
-            updatedEmployee.get().setNombreCompleto(updEmployee.getNombreCompleto());
-            updatedEmployee.get().setDireccion(updEmployee.getDireccion());
+            updatedEmployee.get().setFirstName(updEmployee.getFirstName());
+            updatedEmployee.get().setLastName(updEmployee.getLastName());
             updatedEmployee.get().setEmail(updEmployee.getEmail());
-            updatedEmployee.get().setDireccion(updEmployee.getDireccion());
+            updatedEmployee.get().setAddress(updEmployee.getAddress());
+            updatedEmployee.get().setCellPhone(updEmployee.getCellPhone());
             updatedEmployee.get().setEnabled(updEmployee.isEnabled());
         }
         return employeeRespository.save(updatedEmployee.get());

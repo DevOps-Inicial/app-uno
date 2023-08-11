@@ -14,7 +14,6 @@ import tech.icei.web.api.appuno.service.IEmployeeService;
 
 import java.util.List;
 import java.util.stream.Collectors;
-
 @RestController
 @RequestMapping("api/v1/fullstack")
 @RequiredArgsConstructor
@@ -39,7 +38,6 @@ public class EmployeeController {
         }
     }
 
-    // Listar todos los registros habilitados enabled = true
     @GetMapping("/enabled-employees/{enabled}")
     public ResponseEntity<List<EmployeeDto>> findAllEnabledEmployees(@PathVariable boolean enabled) {
 
@@ -54,7 +52,7 @@ public class EmployeeController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
-    // Obtener un registro
+
     @GetMapping("/single-employees/{id}")
     public ResponseEntity<EmployeeDto> findEmployeeByID(@Valid @PathVariable String id) {
 
@@ -70,7 +68,6 @@ public class EmployeeController {
         }
     }
 
-    // Guardar un empleado
     @PostMapping("/keep-employees")
     public ResponseEntity<EmployeeDto> saveEmployee(@Valid @RequestBody EmployeeDto nEmployeeDto) {
         try {
@@ -86,7 +83,6 @@ public class EmployeeController {
         }
     }
 
-    // Actualizar el registro
     @PutMapping("/catchup-employees/{id}")
     public ResponseEntity<EmployeeDto> updateEmployee(@Valid @PathVariable String id, @Valid @RequestBody EmployeeDto uEmployeeDto) {
 
@@ -103,7 +99,6 @@ public class EmployeeController {
         }
     }
 
-    // Eliminacio logica del registro
     @PatchMapping("/remove-employees/{id}")
     public ResponseEntity<EmployeeDto> deleteEmployeeByID(@Valid @PathVariable String id) {
 

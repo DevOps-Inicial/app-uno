@@ -5,10 +5,10 @@ spring:
     driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://192.168.138.139:5432/icei_employees
     username: sqluser
-    password: D3v310p342022***
+    password: D3v310p34202x-GD
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: none
     show-sql: true
     database: postgresql
     database-platform: org.hibernate.dialect.PostgreSQLDialect
