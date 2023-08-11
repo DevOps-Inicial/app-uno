@@ -6,10 +6,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-@OpenAPIDefinition(info = @Info(title = "API SWAGGER de la aplicacion AppUno", version = "1.0", description = "Documentacion de la API App-Employees version 1.0"))
+@OpenAPIDefinition(info = @Info(title = "API SWAGGER Employee Application", version = "1.0", description = "API REST Documentation for the Application Employees version 1.0"))
 public class AppUnoApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(AppUnoApplication.class, args);
 	}
-
 }

@@ -6,7 +6,7 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 @Data
-public class EmployeeDto implements Serializable {
+public class GEmployeeDto implements Serializable {
 
     @Serial
     private static final long serialVersionUID = -5520696402793181123L;

@@ -8,9 +8,9 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import tech.icei.web.api.appuno.dto.EmployeeDto;
-import tech.icei.web.api.appuno.entity.Employee;
-import tech.icei.web.api.appuno.service.IEmployeeService;
+import tech.icei.web.api.appuno.dto.GEmployeeDto;
+import tech.icei.web.api.appuno.entity.GEmployee;
+import tech.icei.web.api.appuno.service.IGEmployeeService;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,17 +18,17 @@ import java.util.stream.Collectors;
 @RequestMapping("api/v1/fullstack")
 @RequiredArgsConstructor
 @Slf4j
-public class EmployeeController {
+public class GEmployeeController {
 
-    private final IEmployeeService employeeService;
+    private final IGEmployeeService employeeService;
     private final ModelMapper modelMapper = new ModelMapper();
 
     // Listar a todos los empleados
     @GetMapping("/all-employees")
-    public ResponseEntity<List<EmployeeDto>> findAllEmployees() {
+    public ResponseEntity<List<GEmployeeDto>> findAllEmployees() {
         try {
             var employees = employeeService.findAll().stream()
-                    .map(allEmp->modelMapper.map(allEmp, EmployeeDto.class)).collect(Collectors.toList());
+                    .map(allEmp->modelMapper.map(allEmp, GEmployeeDto.class)).collect(Collectors.toList());
             log.debug("Listado completo de registros");
             return new ResponseEntity<>(employees, HttpStatus.OK);
         }
@@ -39,11 +39,11 @@ public class EmployeeController {
     }
 
     @GetMapping("/enabled-employees/{enabled}")
-    public ResponseEntity<List<EmployeeDto>> findAllEnabledEmployees(@PathVariable boolean enabled) {
+    public ResponseEntity<List<GEmployeeDto>> findAllEnabledEmployees(@PathVariable boolean enabled) {
 
         try {
             var enabledEmployees = employeeService.findAllEnabled(true).stream()
-                    .map(enabEmployees->modelMapper.map(enabEmployees, EmployeeDto.class)).collect(Collectors.toList());
+                    .map(enabEmployees->modelMapper.map(enabEmployees, GEmployeeDto.class)).collect(Collectors.toList());
             log.debug("Listado de registros habilitados");
             return new ResponseEntity<>(enabledEmployees, HttpStatus.OK);
         }
@@ -54,11 +54,11 @@ public class EmployeeController {
     }
 
     @GetMapping("/single-employees/{id}")
-    public ResponseEntity<EmployeeDto> findEmployeeByID(@Valid @PathVariable String id) {
+    public ResponseEntity<GEmployeeDto> findEmployeeByID(@Valid @PathVariable String id) {
 
         try {
             var singleEmployee = employeeService.findByEmployeeID(id);
-            var singleEmployeeResponse = modelMapper.map(singleEmployee.get(), EmployeeDto.class);
+            var singleEmployeeResponse = modelMapper.map(singleEmployee.get(), GEmployeeDto.class);
             log.debug("Un registro");
             return new ResponseEntity<>(singleEmployeeResponse, HttpStatus.OK);
         }
@@ -69,11 +69,11 @@ public class EmployeeController {
     }
 
     @PostMapping("/keep-employees")
-    public ResponseEntity<EmployeeDto> saveEmployee(@Valid @RequestBody EmployeeDto nEmployeeDto) {
+    public ResponseEntity<GEmployeeDto> saveEmployee(@Valid @RequestBody GEmployeeDto nGEmployeeDto) {
         try {
-            var employeeRequest = modelMapper.map(nEmployeeDto, Employee.class);
+            var employeeRequest = modelMapper.map(nGEmployeeDto, GEmployee.class);
             var savedEmployee = employeeService.save(employeeRequest);
-            var employeeResponse = modelMapper.map(savedEmployee, EmployeeDto.class);
+            var employeeResponse = modelMapper.map(savedEmployee, GEmployeeDto.class);
             log.debug("Registro guardado exitosamente");
             return new ResponseEntity<>(employeeResponse, HttpStatus.CREATED);
         }
@@ -84,12 +84,12 @@ public class EmployeeController {
     }
 
     @PutMapping("/catchup-employees/{id}")
-    public ResponseEntity<EmployeeDto> updateEmployee(@Valid @PathVariable String id, @Valid @RequestBody EmployeeDto uEmployeeDto) {
+    public ResponseEntity<GEmployeeDto> updateEmployee(@Valid @PathVariable String id, @Valid @RequestBody GEmployeeDto uGEmployeeDto) {
 
         try {
-            var employeeRequest = modelMapper.map(uEmployeeDto, Employee.class);
+            var employeeRequest = modelMapper.map(uGEmployeeDto, GEmployee.class);
             var updatedEmployee = employeeService.update(id, employeeRequest);
-            var employeeResponse = modelMapper.map(updatedEmployee, EmployeeDto.class);
+            var employeeResponse = modelMapper.map(updatedEmployee, GEmployeeDto.class);
             log.debug("Registro actualizado exitosamente");
             return new ResponseEntity<>(employeeResponse, HttpStatus.ACCEPTED);
         }
@@ -100,11 +100,11 @@ public class EmployeeController {
     }
 
     @PatchMapping("/remove-employees/{id}")
-    public ResponseEntity<EmployeeDto> deleteEmployeeByID(@Valid @PathVariable String id) {
+    public ResponseEntity<GEmployeeDto> deleteEmployeeByID(@Valid @PathVariable String id) {
 
         try {
             var deletedEmployee = employeeService.delete(id);
-            var employeeResponse = modelMapper.map(deletedEmployee, EmployeeDto.class);
+            var employeeResponse = modelMapper.map(deletedEmployee, GEmployeeDto.class);
             log.debug("Registro eliminado");
             return new ResponseEntity<>(employeeResponse, HttpStatus.NO_CONTENT);
         }

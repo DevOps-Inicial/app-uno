@@ -1,11 +1,11 @@
 package tech.icei.web.api.appuno.entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.ColumnTransformer;
+import org.hibernate.annotations.NaturalId;
 import org.hibernate.annotations.UuidGenerator;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
@@ -14,34 +14,24 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
+
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@EntityListeners(AuditingEntityListener.class)
-@Table(name = "employees")
-public class Employee {
+@EntityListeners(value = AuditingEntityListener.class)
+@Table(name = "g_roles", schema = "icei")
+public class GRole {
 
     @Id
     @UuidGenerator
-    @Column(name = "employee_id", unique = true, nullable = false)
-    private String employeeId;
+    @Column(name="role_id", updatable = false, nullable = false)
+    private String roleId;
 
-    @Column(name = "first_name", length = 45)
-    private String firstName;
-
-    @Column(name = "last_name", length = 45)
-    private String lastName;
-
-    @Email
-    private String email;
-
-    @Column(length = 200)
-    private String address;
-
-    @Column(name = "cell_phone", length = 15)
-    private String cellPhone;
+    @Enumerated(EnumType.STRING)
+    @NaturalId
+    @ColumnTransformer(read = "pgp_sym_decrypt(name::bytea,current_setting('encrypt.key'))", write = "pgp_sym_encrypt(?,current_setting('encrypt.key'))")
+    private ERole name;
 
     private boolean enabled;
 
