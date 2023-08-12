@@ -9,6 +9,8 @@ import tech.icei.web.api.appuno.service.IGUserService;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
+
 @RequiredArgsConstructor
 @Service
 public class GUserServiceImpl implements IGUserService {
@@ -28,7 +30,7 @@ public class GUserServiceImpl implements IGUserService {
 
     @Override
     @Transactional(readOnly = true)
-    public Optional<GUser> findByUserID(String id) {
+    public Optional<GUser> findByUserID(UUID id) {
         return userRepository.findByUserId(id);
     }
 
@@ -40,7 +42,7 @@ public class GUserServiceImpl implements IGUserService {
 
     @Override
     @Transactional
-    public GUser update(String id, GUser updGUser) {
+    public GUser update(UUID id, GUser updGUser) {
 
         var updatedGUser = userRepository.findByUserId(id);
 
@@ -56,7 +58,7 @@ public class GUserServiceImpl implements IGUserService {
 
     @Override
     @Transactional
-    public GUser delete(String id) {
+    public GUser delete(UUID id) {
 
         var deletedGUser = userRepository.findByUserId(id);
         deletedGUser.ifPresent(delGUser -> deletedGUser.get().setEnabled(false));

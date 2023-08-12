@@ -5,9 +5,10 @@ import tech.icei.web.api.appuno.entity.GEmployee;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
-public interface GEmployeeRepository extends JpaRepository<GEmployee, String> {
+public interface GEmployeeRepository extends JpaRepository<GEmployee, UUID> {
 
-    Optional<GEmployee> findByEmployeeId(String id);
+    Optional<GEmployee> findByEmployeeId(UUID id);
     List<GEmployee> findAllByEnabled(boolean enabled);
 }

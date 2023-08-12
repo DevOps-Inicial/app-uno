@@ -6,9 +6,10 @@ import tech.icei.web.api.appuno.entity.GRole;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
-public interface GRoleRepository extends JpaRepository<GRole, String> {
+public interface GRoleRepository extends JpaRepository<GRole, UUID> {
     Optional<GRole> findByName(ERole roleName);
-    Optional<GRole> findByRoleId(String id);
+    Optional<GRole> findByRoleId(UUID id);
     List<GRole> findAllByEnabledOrderByRoleIdAsc(boolean enabled);
 }

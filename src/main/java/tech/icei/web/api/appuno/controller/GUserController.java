@@ -1,15 +1,10 @@
 package tech.icei.web.api.appuno.controller;
 
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import tech.icei.web.api.appuno.entity.ERole;
 import tech.icei.web.api.appuno.entity.GRole;
 import tech.icei.web.api.appuno.entity.GUser;
@@ -19,6 +14,7 @@ import tech.icei.web.api.appuno.repository.GRoleRepository;
 import tech.icei.web.api.appuno.repository.GUserRepository;
 import tech.icei.web.api.appuno.security.jwt.JwtUtils;
 
+import javax.validation.Valid;
 import java.util.HashSet;
 import java.util.Set;
 

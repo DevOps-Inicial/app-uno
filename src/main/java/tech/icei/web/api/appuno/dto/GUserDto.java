@@ -7,13 +7,15 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Set;
+import java.util.UUID;
+
 @Data
 public class GUserDto implements Serializable {
 
     @Serial
     private static final long serialVersionUID = -5520696402793181123L;
 
-    private String userId;
+    private UUID userId;
     private String username;
     private String password;
     private String email;

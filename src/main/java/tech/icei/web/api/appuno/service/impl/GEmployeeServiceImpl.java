@@ -9,6 +9,7 @@ import tech.icei.web.api.appuno.service.IGEmployeeService;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @RequiredArgsConstructor
 @Service
@@ -30,7 +31,7 @@ public class GEmployeeServiceImpl implements IGEmployeeService {
 
     @Override
     @Transactional(readOnly = true)
-    public Optional<GEmployee> findByEmployeeID(String id) {
+    public Optional<GEmployee> findByEmployeeID(UUID id) {
         return employeeRespository.findByEmployeeId(id);
     }
 
@@ -42,7 +43,7 @@ public class GEmployeeServiceImpl implements IGEmployeeService {
 
     @Override
     @Transactional
-    public GEmployee update(String id, GEmployee updGEmployee) {
+    public GEmployee update(UUID id, GEmployee updGEmployee) {
 
         var updatedEmployee = employeeRespository.findByEmployeeId(id);
         if (updatedEmployee.isPresent()) {
@@ -58,7 +59,7 @@ public class GEmployeeServiceImpl implements IGEmployeeService {
 
     @Override
     @Transactional
-    public GEmployee delete(String id) {
+    public GEmployee delete(UUID id) {
         var deletedEmployee = employeeRespository.findByEmployeeId(id);
         deletedEmployee.ifPresent(delGEmployee ->deletedEmployee.get().setEnabled(false));
         return employeeRespository.save(deletedEmployee.get());

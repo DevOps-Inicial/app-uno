@@ -9,6 +9,7 @@ import tech.icei.web.api.appuno.service.IGRoleService;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @RequiredArgsConstructor
 @Service
@@ -29,7 +30,7 @@ public class GRoleServiceImpl implements IGRoleService {
 
     @Override
     @Transactional(readOnly = true)
-    public Optional<GRole> findByRoleID(String id) {
+    public Optional<GRole> findByRoleID(UUID id) {
         return roleRepository.findByRoleId(id);
     }
 
@@ -41,7 +42,7 @@ public class GRoleServiceImpl implements IGRoleService {
 
     @Override
     @Transactional
-    public GRole update(String id, GRole updGRole) {
+    public GRole update(UUID id, GRole updGRole) {
 
         var updatedGRole = roleRepository.findByRoleId(id);
         if (updatedGRole.isPresent()) {
@@ -53,7 +54,7 @@ public class GRoleServiceImpl implements IGRoleService {
 
     @Override
     @Transactional
-    public GRole delete(String id) {
+    public GRole delete(UUID id) {
         var deletedGRole = roleRepository.findByRoleId(id);
         deletedGRole.ifPresent(delGRole -> deletedGRole.get().setEnabled(false));
         return roleRepository.save(deletedGRole.get());

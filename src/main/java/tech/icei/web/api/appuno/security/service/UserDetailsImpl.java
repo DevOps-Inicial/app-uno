@@ -12,19 +12,20 @@ import java.io.Serial;
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 public class UserDetailsImpl implements UserDetails {
     @Serial
     private static final long serialVersionUID = 3814214723061121561L;
 
-    private String id;
+    private UUID id;
     private String username;
     private String email;
     @JsonIgnore
     private final String password;
     private final Collection<? extends GrantedAuthority> authorities;
-    public UserDetailsImpl(String id, String username, String email, String password,
+    public UserDetailsImpl(UUID id, String username, String email, String password,
                            Collection<? extends GrantedAuthority> authorities) {
         this.id = id;
         this.username = username;
@@ -50,7 +51,7 @@ public class UserDetailsImpl implements UserDetails {
         return authorities;
     }
 
-    public String getId() { return id; }
+    public UUID getId() { return id; }
     public String getEmail() { return email; }
     @Override
     public String getPassword() {

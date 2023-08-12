@@ -1,6 +1,5 @@
 package tech.icei.web.api.appuno.controller;
 
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
@@ -12,7 +11,9 @@ import tech.icei.web.api.appuno.dto.GEmployeeDto;
 import tech.icei.web.api.appuno.entity.GEmployee;
 import tech.icei.web.api.appuno.service.IGEmployeeService;
 
+import javax.validation.Valid;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 @RestController
 @RequestMapping("api/v1")
@@ -54,7 +55,7 @@ public class GEmployeeController {
     }
 
     @GetMapping("/single-employees/{id}")
-    public ResponseEntity<GEmployeeDto> findEmployeeByID(@Valid @PathVariable String id) {
+    public ResponseEntity<GEmployeeDto> findEmployeeByID(@Valid @PathVariable UUID id) {
 
         try {
             var singleEmployee = employeeService.findByEmployeeID(id);
@@ -84,7 +85,7 @@ public class GEmployeeController {
     }
 
     @PutMapping("/catchup-employees/{id}")
-    public ResponseEntity<GEmployeeDto> updateEmployee(@Valid @PathVariable String id, @Valid @RequestBody GEmployeeDto uGEmployeeDto) {
+    public ResponseEntity<GEmployeeDto> updateEmployee(@Valid @PathVariable UUID id, @Valid @RequestBody GEmployeeDto uGEmployeeDto) {
 
         try {
             var employeeRequest = modelMapper.map(uGEmployeeDto, GEmployee.class);
@@ -100,7 +101,7 @@ public class GEmployeeController {
     }
 
     @PatchMapping("/remove-employees/{id}")
-    public ResponseEntity<GEmployeeDto> deleteEmployeeByID(@Valid @PathVariable String id) {
+    public ResponseEntity<GEmployeeDto> deleteEmployeeByID(@Valid @PathVariable UUID id) {
 
         try {
             var deletedEmployee = employeeService.delete(id);

@@ -5,13 +5,15 @@ import lombok.Data;
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.UUID;
+
 @Data
 public class GEmployeeDto implements Serializable {
 
     @Serial
     private static final long serialVersionUID = -5520696402793181123L;
 
-    private String employeeId;
+    private UUID employeeId;
     private String firstName;
     private String lastName;
     private String email;
